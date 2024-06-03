@@ -2,7 +2,7 @@
 
 ## Clone app về bằng lệnh
 ```bash
-git clone https://github.com/manle423/https://github.com/manle423/astar_finding_path
+git clone https://github.com/manle423/astar_finding_path.git
 ```
 
 ## Tải các gói module cần thiết
