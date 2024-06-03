@@ -105,6 +105,7 @@ def astar(grid, start, goal):
                 heappush(openList, (fValue[neighbor], neighbor))
 
     return False
+
 ###########################################################################################################
 # shorttestPath algorithm (tổng chi phí đi qua các điểm đón và về đích là nhỏ nhất)
 # áp dụng thuật toán astar cho mỗi lần tìm đường (đi đến điểm đón có chi phí nhỏ nhất đối với điểm đang xét)

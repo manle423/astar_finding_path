@@ -1,6 +1,6 @@
 from heapq import heappop, heappush
 from .astar import astar
-from .utils import costOfPath, heuristic
+from .utils import costOfPath, heuristic, costOfPath1
 
 ###########################################################################################################
 # shorttestPath algorithm (tổng chi phí đi qua các điểm đón và về đích là nhỏ nhất)
@@ -23,7 +23,8 @@ def shorttestPath(grid, start, goal, pickupPoint):
                     return (-1, False) 
                 routes[point] = path
                 # ở đây phải có 1 hàm tính chi phí đường đi
-                heappush(pq, (costOfPath(path, newStart)-heuristic(point, goal), point) )
+                heappush(pq, (costOfPath1(path), point) )
+                # heappush(pq, (costOfPath(path, newStart)-heuristic(point, goal), point) )
         cost, pickPoint = heappop(pq) #Cho ra điểm có chi phí nhỏ nhất
         sumCost += cost
         finalPath += routes[pickPoint]
@@ -34,8 +35,9 @@ def shorttestPath(grid, start, goal, pickupPoint):
     #Tìm lộ trình từ điểm đón cuối dùng đến đích
     path = astar(grid, newStart, goal)
     if path == False:
-            return (-1, False)
-    sumCost += costOfPath(path, newStart)
+        return (-1, False)
+    sumCost += costOfPath1(path)
+    # sumCost += costOfPath(path, newStart)
     finalPath += path
 
     #Trả về tổng chi phí và lộ trình

@@ -50,6 +50,15 @@ def costOfPath(path, start):
 
     return cost
 
+def costOfPath1(path):
+    cost = 0
+    for i in range(len(path) - 1):
+        if (path[i][0] == path[i + 1][0]) or (path[i][1] == path[i + 1][1]):
+            cost += 1
+        else:
+            cost += sqrt(2)
+    return cost
+
 ##############################################################
 # changeCoordinate: thay đổi tọa độ các polygon trên bản đồ
 def changeCoordinate(grid, noThisWay, quantity):
