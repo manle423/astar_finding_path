@@ -3,7 +3,7 @@ from .utils import distance, insideThePolygon, adj
 
 def UCS(grid, start, goal):
     closedList = []
-    gValue = {start:0}
+    gValue = {start: 0}
     openList = [(gValue[start], start)]
     prev = {}
 
@@ -22,25 +22,21 @@ def UCS(grid, start, goal):
 
         for i, j in adj:
             neighbor = current[0] + i, current[1] + j
-            gValueNeighbor = gValue[current] + distance(current, neighbor)  # khoảng cách
+            gValueNeighbor = gValue[current] + distance(current, neighbor)
 
-            if grid[neighbor[1], neighbor[0]] != 0: # kiểm tra trường hợp đụng phải chướng ngại vật
+            if grid[neighbor[1], neighbor[0]] == 1:
                 continue
 
-            if (neighbor[0] != current[0]) and (neighbor[1] != current[1]): # trường hợp nó nằm trên đường chéo
-                if insideThePolygon(neighbor, current, grid): # kiểm tra xem điểm này có nằm trong đa giác hay chưa
+            if (neighbor[0] != current[0]) and (neighbor[1] != current[1]):
+                if insideThePolygon(neighbor, current, grid):
                     continue
 
-            #Nếu nằm trong tập đóng thì bỏ qua
-            # đã tồn tại và đường đi tới nó hiện tại ngắn hơn đường đi mới tìm được thì không xét
-            if neighbor in closedList: 
+            if neighbor in closedList:
                 continue
 
-            #Nếu chưa trong tập mở hoặc đang trong tập mở mà có giá trị tốt hơn thì push vào tập mở
-            if (neighbor not in [item[1] for item in openList]) or (gValueNeighbor < gValue.get(neighbor,0)):
+            if (neighbor not in [item[1] for item in openList]) or (gValueNeighbor < gValue.get(neighbor, 0)):
                 gValue[neighbor] = gValueNeighbor
                 prev[neighbor] = current
-                heappush(openList, (gValue[neighbor],neighbor))
+                heappush(openList, (gValue[neighbor], neighbor))
     
     return False
-

@@ -53,26 +53,16 @@ def costOfPath(path, start):
 ##############################################################
 # changeCoordinate: thay đổi tọa độ các polygon trên bản đồ
 def changeCoordinate(grid, noThisWay, quantity):
-    for i in range(quantity):# chạy lần lượt các đa giác
-        value=i+3
-        if value in noThisWay: # kiểm tra xem đa giác này có giới hạn việc di chuyển về hướng nào không
-            x_limit=noThisWay[value][0]
-            y_limit=noThisWay[value][1]
-            #xét những hướng x có thể đi
-            if x_limit==0:
-                new_X= randint(-1,1)
-            elif x_limit>0:
-                new_X=randint(0,1)
-            else: new_X=randint(-1,0)
-            # xét những hướng y có thể đi
-            if y_limit==0:
-                new_Y= randint(-1,1)
-            elif y_limit>0:
-                new_Y=randint(0,1)
-            else: new_Y=randint(-1,0)
-        for i in range(grid.shape[1]): #x
-            for j in range(grid.shape[0]): #y
-                if grid[j,i]==value:
-                    grid[j,i]=0
-                    grid[j+new_Y, i+new_X]=value
-    
+    for i in range(quantity):
+        value = i + 3
+        if value in noThisWay:
+            x_limit = noThisWay[value][0]
+            y_limit = noThisWay[value][1]
+            new_X = randint(-1, 1) if x_limit == 0 else (randint(0, 1) if x_limit > 0 else randint(-1, 0))
+            new_Y = randint(-1, 1) if y_limit == 0 else (randint(0, 1) if y_limit > 0 else randint(-1, 0))
+        for i in range(grid.shape[1]):  # x
+            for j in range(grid.shape[0]):  # y
+                if grid[j, i] == value:
+                    grid[j, i] = 0
+                    grid[j + new_Y, i + new_X] = value
+

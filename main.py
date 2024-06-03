@@ -33,6 +33,10 @@ def processing():
         quantity = int(token[0])
         # Thuật toán vẽ
         drawing(grid, fi, quantity)
+        print("Grid: \n", grid)
+        print("Start: ", start)
+        print("Goal: ", goal)
+        print("PickupPoint: ", pickupPoint)
         cost, route = shorttestPath(grid, start, goal, pickupPoint)
         #vẽ các điểm đón ra
         for i,j in pickupPoint:

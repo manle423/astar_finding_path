@@ -11,18 +11,16 @@ def drawing(grid, fi, quantity):
     #đọc vào số hình
     for k in range(quantity):
         line = fi.readline()
-
+        
         token = line.split(',')
         vertices = []
         pair_Index = [] #Chỉ số các cặp đỉnh của đa giác theo chiều kim đồng hồ để xét nối với nhau
-
 
         for i in range(int(len(token) / 2)):
             x = int(token[2*i])
             y = int(token[2*i +  1])
             vertices.append((x, y))
             grid[y][x] = k + 3
-
 
         #nếu trường hợp là vẽ đoạn thẳng
         if len(vertices) == 2:
@@ -38,7 +36,3 @@ def drawing(grid, fi, quantity):
                 grid[y][x] = k + 3
 
     fi.close()
-
-
-
-
