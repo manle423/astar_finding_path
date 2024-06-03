@@ -12,5 +12,5 @@ pip install -r requirements.txt
 
 ## Chạy thử ứng dụng
 ```bash
-py gui/app.py
+py main.py
 ```
