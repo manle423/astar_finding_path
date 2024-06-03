@@ -1,10 +1,16 @@
-* - Dòng đầu là giới hạn của không gian, được mô tả lần lượt bởi kích thước
-ngang, kích thước dọc
-* - Dòng thức hai lần lượt là tọa độ điểm bắt đầu, tọa đọa điểm kết thúc và tập
-hợp các điểm đón (nếu có).
-* - Dòng thứ ba là số lượng đa giác có trong không gian
-* - Các dòng tiếp theo, mỗi dòng chứa một đa giác theo quy tắc:
-o Đa giác là tập hợp các điểm kế nhau theo chiều kim đồng hồ. Điểm
-cuối cùng sẽ được hiểu ngầm là sẽ được nối đến điểm đầu tiên để tạo
-thành một đa giác lồi hợp lệ.
-Mỗi số trong dữ liệu input cách nhau bởi dấu phẩy.
+# Cách chạy thử ứng dụng
+
+## Clone app về bằng lệnh
+```bash
+git clone https://github.com/manle423/https://github.com/manle423/astar_finding_path
+```
+
+## Tải các gói module cần thiết
+```bash
+pip install -r requirements.txt
+```
+
+## Chạy thử ứng dụng
+```bash
+py gui/app.py
+```
