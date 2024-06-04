@@ -58,20 +58,3 @@ def costOfPath1(path):
         else:
             cost += sqrt(2)
     return cost
-
-##############################################################
-# changeCoordinate: thay đổi tọa độ các polygon trên bản đồ
-def changeCoordinate(grid, noThisWay, quantity):
-    for i in range(quantity):
-        value = i + 3
-        if value in noThisWay:
-            x_limit = noThisWay[value][0]
-            y_limit = noThisWay[value][1]
-            new_X = randint(-1, 1) if x_limit == 0 else (randint(0, 1) if x_limit > 0 else randint(-1, 0))
-            new_Y = randint(-1, 1) if y_limit == 0 else (randint(0, 1) if y_limit > 0 else randint(-1, 0))
-        for i in range(grid.shape[1]):  # x
-            for j in range(grid.shape[0]):  # y
-                if grid[j, i] == value:
-                    grid[j, i] = 0
-                    grid[j + new_Y, i + new_X] = value
-

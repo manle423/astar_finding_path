@@ -172,5 +172,3 @@ class PathfindingApp:
             visited.append((y, x))
             self.canvas.update()
             self.root.after(100)  # Pause for 10 milliseconds to simulate animation
-
-            
