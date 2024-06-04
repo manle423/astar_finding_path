@@ -169,21 +169,31 @@ class PathfindingApp:
     # Draw the route on the canvas
     def draw_route(self, route):
         cell_size = 500 // self.grid_size
-        visited = []
+        visited = {}
         dot_size = cell_size // 3  # Kích thước của chấm nhỏ, bạn có thể điều chỉnh cho phù hợp
 
         for (y, x) in route:
-            color = "red" if (y, x) in visited else "black"
+            if (y, x) in visited:
+                visited[(y, x)] += 1
+            else:
+                visited[(y, x)] = 1
+
+            color = "red" if visited[(y, x)] > 1 else "black"
             dot_x = x * cell_size + cell_size // 2
             dot_y = y * cell_size + cell_size // 2
+
+            # Vẽ chấm
             self.canvas.create_oval(
                 dot_x - dot_size // 2, dot_y - dot_size // 2,
                 dot_x + dot_size // 2, dot_y + dot_size // 2,
                 fill=color, outline=color
             )
-            visited.append((y, x))
+
+            # Hiển thị số lần đã đi qua điểm đó
+            self.canvas.create_text(dot_x, dot_y, text=str(visited[(y, x)]), fill="white")
+
             self.canvas.update()
-            self.root.after(100)  # Pause for 10 milliseconds to simulate animation
+            self.root.after(100)  # Pause for 100 milliseconds to simulate animation
 
     def clear_all_points(self):
         self.start_point = None
