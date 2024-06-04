@@ -31,9 +31,9 @@ def astar(grid, start, goal):
 
             gValueNeighbor = gValue[current] + distance(current, neighbor)  # Cost to neighbor
 
-            if (neighbor[0] != current[0]) and (neighbor[1] != current[1]):  # Diagonal move
-                if insideThePolygon(neighbor, current, grid):
-                    continue
+            # if (neighbor[0] != current[0]) and (neighbor[1] != current[1]):  # Diagonal move
+            #     if insideThePolygon(neighbor, current, grid):
+            #         continue
 
             if (neighbor not in [item[1] for item in openList]) or (gValueNeighbor < gValue.get(neighbor, float('inf'))):
                 gValue[neighbor] = gValueNeighbor
