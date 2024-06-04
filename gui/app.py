@@ -108,6 +108,14 @@ class PathfindingApp:
                     color = "black"
                 self.canvas.create_rectangle(j * cell_size, i * cell_size, (j + 1) * cell_size, (i + 1) * cell_size, fill=color)
 
+                # Add text labels for start and goal points
+                if (i, j) == self.start_point:
+                    self.canvas.create_text(j * cell_size + cell_size // 2, i * cell_size + cell_size // 2, text="S", fill="white")
+                elif (i, j) == self.goal_point:
+                    self.canvas.create_text(j * cell_size + cell_size // 2, i * cell_size + cell_size // 2, text="G", fill="white")
+                elif (i, j) in self.pickup_points:
+                    self.canvas.create_text(j * cell_size + cell_size // 2, i * cell_size + cell_size // 2, text="P", fill="white")
+
     # Handle canvas click events
     def on_canvas_click(self, event):
         cell_size = 500 // self.grid_size
