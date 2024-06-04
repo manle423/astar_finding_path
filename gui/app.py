@@ -52,9 +52,15 @@ class PathfindingApp:
 
         self.run_button = tk.Button(self.root, text="Run Pathfinding", command=self.run_pathfinding)
         self.run_button.grid(row=5, column=3)
+        
+        self.clear_point_button = tk.Button(self.root, text="Clear Point", command=self.clear_point)
+        self.clear_point_button.grid(row=6, column=3)
+        
+        self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_all_points)
+        self.clear_button.grid(row=7, column=3)
 
         self.cost_label = tk.Label(self.root, text="Cost: N/A")
-        self.cost_label.grid(row=6, column=3)
+        self.cost_label.grid(row=8, column=3)
 
     # Set the grid size based on user input
     def set_grid_size(self):
@@ -116,6 +122,8 @@ class PathfindingApp:
         elif self.current_action == "wall":
             self.walls.append((y, x))
             self.grid[y, x] = 1
+        elif self.current_action == "clear":
+            self.clear_specific_point(y, x)
         self.draw_grid()
 
     # Set the current action to "start"
@@ -133,6 +141,10 @@ class PathfindingApp:
     # Set the current action to "wall"
     def add_wall(self):
         self.current_action = "wall"
+
+    # Set the current action to "clear"
+    def clear_point(self):
+        self.current_action = "clear"
 
     # Run the pathfinding algorithm and draw the route
     def run_pathfinding(self):
@@ -172,3 +184,25 @@ class PathfindingApp:
             visited.append((y, x))
             self.canvas.update()
             self.root.after(100)  # Pause for 10 milliseconds to simulate animation
+
+    def clear_all_points(self):
+        self.start_point = None
+        self.goal_point = None
+        self.pickup_points = []
+        self.walls = []
+        self.grid = np.zeros((self.grid_size, self.grid_size))
+        self.create_boundaries()
+        self.draw_grid()
+        self.cost_label.config(text="Cost: N/A")
+        
+    # Clear a specific point on the grid
+    def clear_specific_point(self, y, x):
+        if (y, x) == self.start_point:
+            self.start_point = None
+        elif (y, x) == self.goal_point:
+            self.goal_point = None
+        elif (y, x) in self.pickup_points:
+            self.pickup_points.remove((y, x))
+        elif (y, x) in self.walls:
+            self.walls.remove((y, x))
+            self.grid[y, x] = 0

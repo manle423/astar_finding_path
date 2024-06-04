@@ -2,9 +2,11 @@ from heapq import *
 from math import sqrt 
 from random import *
 
-#Độ dời để xét các điểm liền kề (các trạng thái tiếp theo)
+#Độ dời để xét các điểm liền kề (các trạng thái tiếp theo) (cho phép đi chéo)
 adj = [(-1, -1), (-1, 0), (-1, 1), (0, -1) , (0, 1), (1, -1), (1, 0), (1, 1)]
 
+# chỉ đi thẳng
+# adj = [(-1, 0), (0, -1) , (0, 1), (1, 0)]
 
 ###########################################################################################################
 #Kiểm tra để phát hiện đi chéo xuyên qua đa giác
