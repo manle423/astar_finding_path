@@ -110,6 +110,9 @@ class PathfindingApp:
         self.toggle_coordinates_button.grid(row=13, column=3, pady=1)
         
     def run_pathfinding_without_logging(self):
+        if not self.check_start_and_goal():
+            return
+        
         for wall in self.walls:
             self.grid[wall[0], wall[1]] = 1
 
@@ -314,17 +317,25 @@ class PathfindingApp:
 
     # Run the pathfinding algorithm and draw the route
     def run_pathfinding(self):
+        if not self.check_start_and_goal():
+            return
+        
         for wall in self.walls:
             self.grid[wall[0], wall[1]] = 1
 
-        print("Grid: \n", self.grid)
-        print("Start: ", self.start_point)
-        print("Goal: ", self.goal_point)
-        print("PickupPoint: ", self.pickup_points)
+        # print("Grid: \n", self.grid)
+        # print("Start: ", self.start_point)
+        # print("Goal: ", self.goal_point)
+        # print("PickupPoint: ", self.pickup_points)
+        self.log(f"Grid: \n{self.grid}")
+        self.log(f"Start: {self.start_point}")
+        self.log(f"Goal: {self.goal_point}")
+        self.log(f"PickupPoint: {self.pickup_points}")
         
         # Assume shorttestPath returns (route, cost)
         cost, route = shorttestPath(self.grid, self.start_point, self.goal_point, self.pickup_points, self.log)
-        print("Route", route)
+        self.log(f"Route {route}")
+        
         if route:
             self.draw_route(route)
             self.cost_label.config(text=f"Cost: {round(cost, 2)}")
@@ -414,3 +425,9 @@ class PathfindingApp:
             self.log(f"Saved current map to {filename}")
         else:
             self.log("Save cancelled")
+
+    def check_start_and_goal(self):
+        if self.start_point is None or self.goal_point is None:
+            messagebox.showerror("Error", "Please set both start and goal points.")
+            return False
+        return True

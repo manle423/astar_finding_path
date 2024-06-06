@@ -1,5 +1,5 @@
 from heapq import heappop, heappush
-from .utils import heuristic, distance, insideThePolygon, adj
+from .utils import heuristic, distance, adj
 
 def astar(grid, start, goal, log=None):
     closedList = set()  # Tập hợp các điểm đã được xem xét
@@ -12,7 +12,6 @@ def astar(grid, start, goal, log=None):
 
     while openList:
         current = heappop(openList)[1]  # Điểm có giá trị f thấp nhất
-        # print(f"Điểm hiện tại: {current}, đích: {goal}")
         if current == goal:
             route = []
             while current in prev:
@@ -25,7 +24,7 @@ def astar(grid, start, goal, log=None):
 
         closedList.add(current)
         if log:
-            log(f"Thêm {current} vào danh sách đóng")
+            log(f"Thêm {current} vào danh sách đã được xem xét")
         
         for i, j in adj:
             neighbor = current[0] + i, current[1] + j  # Điểm lân cận
@@ -54,3 +53,4 @@ def astar(grid, start, goal, log=None):
 
     # print("Không tìm thấy đường đi")
     return False
+
