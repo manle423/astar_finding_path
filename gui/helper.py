@@ -1,9 +1,4 @@
-from algorithms.shorttestPath import shorttestPath
-from tkinter import messagebox, filedialog
-import numpy as np
 import tkinter as tk
-import json
-import random
 
 # Tạo ra giao diện
 def create_widgets(app):
