@@ -255,7 +255,6 @@ class PathfindingApp:
         
         # Assume shorttestPath returns (route, cost)
         cost, route = shorttestPath(self.grid, self.start_point, self.goal_point, self.pickup_points, self.log)
-        self.log(f"Route {route}")
         
         if route:
             self.draw_route(route)

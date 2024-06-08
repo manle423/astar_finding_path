@@ -1,5 +1,9 @@
 from heapq import heappop, heappush
 from .astar import astar
+from .bfs import bfs
+from .dfs import dfs
+from .dijkstra import dijkstra
+from .greedy_bfs import greedy_bfs
 from .utils import costOfPath
 
 ###########################################################################################################
@@ -20,7 +24,11 @@ def shorttestPath(grid, start, goal, pickupPoint, log=None):
         
         for point in pickupPoint:
             if point not in visited:
-                path = astar(grid, newStart, point, log=log)  # đương đi ngắn nhất từ điểm đang xét đến nó
+                path = astar(grid, newStart, point, log=log)
+                # path = bfs(grid, newStart, point, log=log)
+                # path = dfs(grid, newStart, point, log=log)
+                # path = greedy_bfs(grid, newStart, point, log=log)
+                # path = dijkstra(grid, newStart, point, log=log)
                 if path == False: #Không tìm thấy đường đi
                     return (-1, False) 
                 routes[point] = path
@@ -42,6 +50,10 @@ def shorttestPath(grid, start, goal, pickupPoint, log=None):
     
     #Tìm lộ trình từ điểm đón cuối dùng đến đích
     path = astar(grid, newStart, goal, log=log)
+    # path = bfs(grid, newStart, goal, log=log)
+    # path = dfs(grid, newStart, goal, log=log)
+    # path = greedy_bfs(grid, newStart, goal, log=log)
+    # path = dijkstra(grid, newStart, goal, log=log)
     if path == False:
         return (-1, False)
     sumCost += costOfPath(path)
