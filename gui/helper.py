@@ -95,3 +95,6 @@ def create_widgets(app):
 
     app.run_button_without_logging = tk.Button(bottom_frame, text="Run Pathfinding (No Logging)", command=app.run_pathfinding_without_logging)
     app.run_button_without_logging.grid(row=0, column=2, pady=5)
+    
+    app.run_button_debug = tk.Button(bottom_frame, text="Run Pathfinding (Debug)", command=app.run_pathfinding_debug)
+    app.run_button_debug.grid(row=0, column=4, pady=5)

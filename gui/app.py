@@ -1,6 +1,7 @@
 from algorithms.shorttestPath import shorttestPath
 from tkinter import messagebox, filedialog
 from .helper import *
+from algorithms.test import *
 import numpy as np
 import tkinter as tk
 import json
@@ -351,3 +352,63 @@ class PathfindingApp:
             messagebox.showerror("Error", "Please set both start and goal points.")
             return False
         return True
+
+    def run_pathfinding_debug(self):
+        if not self.check_start_and_goal():
+            return
+        
+        for wall in self.walls:
+            self.grid[wall[0], wall[1]] = 1
+
+        def update_canvas(point, color, override=False):
+            cell_size = 500 // self.grid_size
+            x1 = point[1] * cell_size
+            y1 = point[0] * cell_size
+            x2 = (point[1] + 1) * cell_size
+            y2 = (point[0] + 1) * cell_size
+
+            if color == "gray":
+                # Vẽ các đường chéo để tạo hiệu ứng sọc
+                self.canvas.create_line(x1, y1, x2, y2, fill=color)
+                self.canvas.create_line(x1, y2, x2, y1, fill=color)
+            elif color == "yellow":
+                # Vẽ các đường ngang để tạo hiệu ứng sọc
+                for i in range(y1, y2, 5):
+                    self.canvas.create_line(x1, i, x2, i, fill=color)
+            elif color == "blue":
+                # Vẽ các đường dọc để tạo hiệu ứng sọc
+                for i in range(x1, x2, 5):
+                    self.canvas.create_line(i, y1, i, y2, fill=color)
+            else:
+                self.canvas.create_rectangle(
+                    x1, y1, x2, y2,
+                    fill=color, outline=""
+                )
+
+            # Đảm bảo điểm bắt đầu và điểm kết thúc luôn hiện rõ
+            if not override:
+                start = self.start_point
+                goal = self.goal_point
+                sx1 = start[1] * cell_size
+                sy1 = start[0] * cell_size
+                sx2 = (start[1] + 1) * cell_size
+                sy2 = (start[0] + 1) * cell_size
+                gx1 = goal[1] * cell_size
+                gy1 = goal[0] * cell_size
+                gx2 = (goal[1] + 1) * cell_size
+                gy2 = (goal[0] + 1) * cell_size
+                self.canvas.create_rectangle(sx1, sy1, sx2, sy2, fill="green", outline="")
+                self.canvas.create_rectangle(gx1, gy1, gx2, gy2, fill="red", outline="")
+
+            self.canvas.update()
+            self.root.after(100)  # Tạm dừng 100 millisecond để mô phỏng animation
+
+        cost, route = shorttestPathTest(self.grid, self.start_point, self.goal_point, self.pickup_points, log=self.log, debug_mode=True, update_canvas=update_canvas)
+
+        if route:
+            self.draw_route(route)
+            self.cost_label.config(text=f"Cost: {round(cost, 2)}")
+        else:
+            messagebox.showinfo("Result", "No path found")
+            self.cost_label.config(text="Cost: N/A")
+

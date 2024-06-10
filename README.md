@@ -16,4 +16,3 @@ py main.py
 ```
 
 # Bài toán được đặt ra
-Cho điểm xuất phát 

@@ -12,14 +12,14 @@ from .utils import costOfPath
 # pickupPoint là danh sách các điểm đón
 # Hàm trả về tổng chi phí và lộ trình
 def shorttestPath(grid, start, goal, pickupPoint, log=None):
-    visited = [] #Danh sách các điểm đón đã đi qua
-    finalPath = [] #Đường đi của bài toán
+    visited = [] # Danh sách các điểm đón đã đi qua
+    finalPath = [] # Đường đi của bài toán
     newStart = start 
     length = len(pickupPoint)
-    sumCost = 0 #Tổng chi phí
+    sumCost = 0 # Tổng chi phí
     
     while(length > 0):
-        routes = {} #Đường đi ngắn nhất từ điểm đang xét đến các điểm đón chưa đi qua
+        routes = {} # Đường đi ngắn nhất từ điểm đang xét đến các điểm đón chưa đi qua
         pq = [] # Dùng priority queue để lưu điểm đón và chi phí từ điểm đang xét đến nó
         
         for point in pickupPoint:
@@ -32,7 +32,7 @@ def shorttestPath(grid, start, goal, pickupPoint, log=None):
                 if path == False: #Không tìm thấy đường đi
                     return (-1, False) 
                 routes[point] = path
-                heappush(pq, (costOfPath(path), point) )
+                heappush(pq, (costOfPath(path), point))
                 
                 # Ghi log
                 if log:
